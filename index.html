@@ -1,0 +1,41 @@
+<!-- 
+Rajith Sanjaya
+ JS_Game
+ 3/21/2022 
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .plane > img{
+        width: 100px;
+        position: absolute;
+        left: 920px;
+        bottom: 20px;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Game</title>
+</head>
+<body>
+  <div class="plane">
+      <img src="assets/img/plane.png" alt="">
+  </div>
+  <script src="assets/js/http_ajax.googleapis.com_ajax_libs_jquery_3.6.0_jquery.js"></script>
+  <script>
+      var left = $('img').offset().left;
+          $(window).keydown(function (event) {
+             if (event.key=="ArrowLeft") {
+                left = left + 100;
+                 $('img').css("left",left)
+                 console.log(left)
+             }else if (event.key=="ArrowRight"){
+                 left = left - 100;
+                 $("img").css("left",left)
+                 console.log(left)
+             }
+          });
+
+  </script>
+</body>
+</html>
