@@ -66,14 +66,14 @@ Rajith Sanjaya
       var bulletLeft = $(".bullet").offset().left;
 
           $(window).keydown(function (event) {
-             if (event.key=="ArrowLeft") {
+             if (event.key=="ArrowRight") {
 
                 imgLeft = imgLeft + 100;
                 bulletLeft = bulletLeft +100;
                  $('.plane').css("left",imgLeft)
                  $('.bullet').css("left",bulletLeft)
 
-             }else if (event.key=="ArrowRight"){
+             }else if (event.key=="ArrowLeft"){
 
                  imgLeft = imgLeft - 100;
                  bulletLeft = bulletLeft -100;
@@ -90,6 +90,20 @@ Rajith Sanjaya
           function ufoKill() {
               if (ufoLeft + 47.5 == bulletLeft){
                   $(".ufo > img").css("display","none");
+                  respawnUFO();
+              }
+          }
+
+          function respawnUFO() {
+              if (ufoLeft < 920) {
+                  ufoLeft = ufoLeft + 200;
+                  $(".ufo").css("left",ufoLeft);
+              }else if (ufoLeft == 720){
+                  ufoLeft = ufoLeft - 200;
+                  $(".ufo").css("left",ufoLeft);
+              }else {
+                  ufoLeft = ufoLeft - 400;
+                  $(".ufo").css("left",ufoLeft);
               }
           }
 
