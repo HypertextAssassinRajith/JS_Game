@@ -24,7 +24,7 @@ Rajith Sanjaya
         width: 100px;
         position: absolute;
         left: 920px;
-        top: 40px;
+        bottom: 800px;
     }
 
     img{
@@ -46,7 +46,8 @@ Rajith Sanjaya
   <script src="assets/js/http_ajax.googleapis.com_ajax_libs_jquery_3.6.0_jquery.js"></script>
   <script>
 
-      setInterval(bulletMove , 200);
+      setInterval(bulletMove , 100);
+
       var bulletUp = parseInt($(".bullet").css("bottom"))
 
           function bulletMove(e) {
@@ -55,6 +56,9 @@ Rajith Sanjaya
               if (bulletUp == 790){
                   bulletUp = 110;
                   $(".bullet").css("bottom",bulletUp);
+                  ufoKill();
+              }else{
+                  $(".ufo > img").css("display","block");
               }
           }
 
@@ -79,6 +83,15 @@ Rajith Sanjaya
              }
 
           });
+
+
+          var ufoLeft= $(".ufo").offset().left;
+          var ufoUp = parseInt($(".ufo").css("bottom"));
+          function ufoKill() {
+              if (ufoLeft + 47.5 == bulletLeft){
+                  $(".ufo > img").css("display","none");
+              }
+          }
 
   </script>
 
