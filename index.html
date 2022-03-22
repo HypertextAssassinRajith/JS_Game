@@ -6,7 +6,7 @@ Rajith Sanjaya
 <!DOCTYPE html>
 <html lang="en">
 <style>
-    .plane > img{
+    .plane {
         width: 100px;
         position: absolute;
         left: 920px;
@@ -20,12 +20,25 @@ Rajith Sanjaya
         height: 15px;
         background-color: black;
     }
+    .ufo {
+        width: 100px;
+        position: absolute;
+        left: 920px;
+        top: 40px;
+    }
+
+    img{
+        width: 100px;
+    }
 </style>
 <head>
     <meta charset="UTF-8">
     <title>Game</title>
 </head>
 <body>
+<div class="ufo">
+    <img src="assets/img/ufo.png" alt="">
+</div>
 <div class="bullet"></div>
   <div class="plane">
       <img src="assets/img/plane.png" alt="">
@@ -45,21 +58,24 @@ Rajith Sanjaya
               }
           }
 
-      var imgLeft = $('img').offset().left;
+      var imgLeft = $('.plane').offset().left;
       var bulletLeft = $(".bullet").offset().left;
+
           $(window).keydown(function (event) {
              if (event.key=="ArrowLeft") {
+
                 imgLeft = imgLeft + 100;
                 bulletLeft = bulletLeft +100;
-                 $('img').css("left",imgLeft)
+                 $('.plane').css("left",imgLeft)
                  $('.bullet').css("left",bulletLeft)
-                 console.log(imgLeft)
+
              }else if (event.key=="ArrowRight"){
+
                  imgLeft = imgLeft - 100;
                  bulletLeft = bulletLeft -100;
-                 $("img").css("left",imgLeft)
+                 $(".plane").css("left",imgLeft)
                  $('.bullet').css("left",bulletLeft)
-                 console.log(imgLeft)
+
              }
 
           });
