@@ -30,6 +30,13 @@ Rajith Sanjaya
     img{
         width: 100px;
     }
+
+    body{
+        background-image: url("assets/img/background.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
 </style>
 <head>
     <meta charset="UTF-8">
@@ -94,14 +101,18 @@ Rajith Sanjaya
               }
           }
 
+      /*let x = Math.floor((Math.random() * 1000) + 1);*/
           function respawnUFO() {
-              if (ufoLeft < 920) {
+              /*$(".ufo").css("left",x);*/
+              if (ufoLeft <= 920) {
                   ufoLeft = ufoLeft + 200;
                   $(".ufo").css("left",ufoLeft);
               }else if (ufoLeft == 720){
                   ufoLeft = ufoLeft - 200;
                   $(".ufo").css("left",ufoLeft);
-              }else {
+
+              }
+              else {
                   ufoLeft = ufoLeft - 400;
                   $(".ufo").css("left",ufoLeft);
               }
