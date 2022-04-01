@@ -81,9 +81,13 @@ Rajith Sanjaya
         bottom: 0;
         margin: auto;
         right: -200px;
-        transform: rotate(90deg);
+        transform: rotate(270deg);
         width: 500px;
 
+
+    }
+    .progressbar .ui-progressbar-value {
+        background-color: blue;
     }
 
 
@@ -145,8 +149,15 @@ Rajith Sanjaya
 
       $( function() {
           $( ".progressbar" ).progressbar({
-              value: 37
+              value: 5,
+              max:100,
+              complete: function( event, ui ) {
+                  levelUp();
+                  value = 0;
+                  $( ".progressbar" ).progressbar( "option", "value", 0);
+              }
           });
+
       } );
 
 
@@ -195,7 +206,8 @@ Rajith Sanjaya
               if (ufoLeft + 47.5 == bulletLeft){
                   $(".ufo > img").css("display","none");
                   respawnUFO();
-                  levelUp();
+                  /*levelUp();*/
+                  fillProgressbar();
               }
           }
 
@@ -216,11 +228,19 @@ Rajith Sanjaya
               }
           }
 
+          //get progressbar value
+      var value = 5;
+
+          function fillProgressbar() {
+              value = value + 5;
+              //set progress bar value
+              $( ".progressbar" ).progressbar( "option", "value", value);
+          }
 
           let level =1;
           function levelUp() {
               level = level +1;
-            $(".level").text("Level :"+level);
+            $(".level").text("Level : "+level);
           }
 
 
