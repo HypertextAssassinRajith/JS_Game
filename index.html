@@ -7,6 +7,26 @@ Rajith Sanjaya
 <html lang="en">
 <style>
 
+    .loader{
+        position: fixed;
+        width: 200px;
+        height: 200px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    .loader > img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .container{
+        
+    }
+
     .plane {
         width: 100px;
         position: absolute;
@@ -33,15 +53,16 @@ Rajith Sanjaya
     }
 
     body > section{
-        position: relative;
-        overflow: hidden;
-        height: 400vh;
-        background-image: url("assets/img/background2.jpg");
-        background-repeat: no-repeat;
+        position: absolute;
+       background-image: url("assets/img/background_vector.gif");
         background-size: cover;
-        animation-name: sky;
-        animation-duration: 12s;
-        animation-iteration-count: infinite;
+        height: 100vh;
+        width: 100vw;
+        background-repeat: no-repeat;
+    }
+
+    .background > img{
+
     }
 
     .level{
@@ -85,24 +106,41 @@ Rajith Sanjaya
 </head>
 
 <body>
-<div class="level"><h1>Level :</h1></div>
-<section></section>
+
+<div class="loader">
+    <img src="assets/img/loader.gif" alt="">
+</div>
+
+<section class="background">
+    <img src="" alt="">
+</section>
+
+<section class="container">
+
+<div ><h1 class="level">Level : 1</h1></div>
+
 <div class="ufo">
     <img src="assets/img/ufo.png" alt="">
 </div>
+
 <div class="bullet"></div>
+
   <div class="plane">
       <img src="assets/img/plane.png" alt="">
   </div>
 
 <div class="progressbar"></div>
 
+</section>
 
   <script src="assets/js/http_ajax.googleapis.com_ajax_libs_jquery_3.6.0_jquery.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
 
   <script>
+      $(window).on("load",function (){
+          $(".loader").fadeOut(1000);
+      });
 
 
       $( function() {
@@ -157,6 +195,7 @@ Rajith Sanjaya
               if (ufoLeft + 47.5 == bulletLeft){
                   $(".ufo > img").css("display","none");
                   respawnUFO();
+                  levelUp();
               }
           }
 
@@ -178,6 +217,11 @@ Rajith Sanjaya
           }
 
 
+          let level =1;
+          function levelUp() {
+              level = level +1;
+            $(".level").text("Level :"+level);
+          }
 
 
   </script>
