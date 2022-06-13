@@ -7,7 +7,11 @@ Rajith Sanjaya
 <html lang="en">
 <style>
 
-    .loader{
+    body{
+        overflow: hidden;
+    }
+
+    .loader {
         position: fixed;
         width: 200px;
         height: 200px;
@@ -23,8 +27,8 @@ Rajith Sanjaya
         height: 100%;
     }
 
-    .container{
-        
+    .container {
+
     }
 
     .plane {
@@ -33,7 +37,8 @@ Rajith Sanjaya
         left: 920px;
         bottom: 20px;
     }
-    .bullet{
+
+    .bullet {
         position: absolute;
         left: 967.5px;
         bottom: 110px;
@@ -41,6 +46,7 @@ Rajith Sanjaya
         height: 15px;
         background-color: white;
     }
+
     .ufo {
         width: 100px;
         position: absolute;
@@ -48,24 +54,24 @@ Rajith Sanjaya
         bottom: 800px;
     }
 
-    img{
+    img {
         width: 100px;
     }
 
-    body > section{
+    body > section {
         position: absolute;
-       background-image: url("assets/img/background_vector.gif");
+        background-image: url("assets/img/background_vector.gif");
         background-size: cover;
         height: 100vh;
         width: 100vw;
         background-repeat: no-repeat;
     }
 
-    .background > img{
+    .background > img {
 
     }
 
-    .level{
+    .level {
         width: 400px;
         color: white;
         font-weight: bolder;
@@ -75,7 +81,7 @@ Rajith Sanjaya
         z-index: 1;
     }
 
-    .progressbar{
+    .progressbar {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -86,18 +92,19 @@ Rajith Sanjaya
 
 
     }
+
     .progressbar .ui-progressbar-value {
         background-color: blue;
     }
 
 
     @keyframes sky {
-        from{
-            transform:translateY(0);
+        from {
+            transform: translateY(0);
 
         }
-        to{
-            transform:translateY(-75%);
+        to {
+            transform: translateY(-75%);
         }
     }
 </style>
@@ -121,130 +128,133 @@ Rajith Sanjaya
 
 <section class="container">
 
-<div ><h1 class="level">Level : 1</h1></div>
+    <div><h1 class="level">Level : 1</h1></div>
 
-<div class="ufo">
-    <img src="assets/img/ufo.png" alt="">
-</div>
+    <div class="ufo">
+        <img src="assets/img/ufo.png" alt="">
+    </div>
 
-<div class="bullet"></div>
+    <div class="bullet"></div>
 
-  <div class="plane">
-      <img src="assets/img/plane.png" alt="">
-  </div>
+    <div class="plane">
+        <img src="assets/img/plane.png" alt="">
+    </div>
 
-<div class="progressbar"></div>
+    <div class="progressbar"></div>
 
 </section>
 
-  <script src="assets/js/http_ajax.googleapis.com_ajax_libs_jquery_3.6.0_jquery.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script src="assets/js/http_ajax.googleapis.com_ajax_libs_jquery_3.6.0_jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
 
-  <script>
-      $(window).on("load",function (){
-          $(".loader").fadeOut(1000);
-      });
+<script>
+    $(window).on("load", function () {
+        $(".loader").fadeOut(1000);
+    });
 
 
-      $( function() {
-          $( ".progressbar" ).progressbar({
-              value: 5,
-              max:100,
-              complete: function( event, ui ) {
-                  levelUp();
-                  value = 0;
-                  $( ".progressbar" ).progressbar( "option", "value", 0);
-              }
-          });
+    $(function () {
+        $(".progressbar").progressbar({
+            value: 5,
+            max: 100,
+            complete: function (event, ui) {
+                levelUp();
+                value = 0;
+                $(".progressbar").progressbar("option", "value", 0);
+            }
+        });
 
-      } );
-
-
-      setInterval(bulletMove , 100);
-
-      var bulletUp = parseInt($(".bullet").css("bottom"))
-
-          function bulletMove(e) {
-          bulletUp = bulletUp + 20;
-              $(".bullet").css("bottom",bulletUp);
-              if (bulletUp == 790){
-                  bulletUp = 110;
-                  $(".bullet").css("bottom",bulletUp);
-                  ufoKill();
-              }else{
-                  $(".ufo > img").css("display","block");
-              }
-          }
-
-      var imgLeft = $('.plane').offset().left;
-      var bulletLeft = $(".bullet").offset().left;
-
-          $(window).keydown(function (event) {
-             if (event.key=="ArrowRight") {
-
-                imgLeft = imgLeft + 100;
-                bulletLeft = bulletLeft +100;
-                 $('.plane').css("left",imgLeft)
-                 $('.bullet').css("left",bulletLeft)
-
-             }else if (event.key=="ArrowLeft"){
-
-                 imgLeft = imgLeft - 100;
-                 bulletLeft = bulletLeft -100;
-                 $(".plane").css("left",imgLeft)
-                 $('.bullet').css("left",bulletLeft)
-
-             }
-
-          });
+    });
 
 
-          var ufoLeft= $(".ufo").offset().left;
-          var ufoUp = parseInt($(".ufo").css("bottom"));
-          function ufoKill() {
-              if (ufoLeft + 47.5 == bulletLeft){
-                  $(".ufo > img").css("display","none");
-                  respawnUFO();
-                  /*levelUp();*/
-                  fillProgressbar();
-              }
-          }
+    setInterval(bulletMove, 10);
 
-      /*let x = Math.floor((Math.random() * 1000) + 1);*/
-          function respawnUFO() {
-              /*$(".ufo").css("left",x);*/
-              if (ufoLeft <= 920) {
-                  ufoLeft = ufoLeft + 200;
-                  $(".ufo").css("left",ufoLeft);
-              }else if (ufoLeft == 720){
-                  ufoLeft = ufoLeft - 200;
-                  $(".ufo").css("left",ufoLeft);
+    var bulletUp = parseInt($(".bullet").css("bottom"))
 
-              }
-              else {
-                  ufoLeft = ufoLeft - 400;
-                  $(".ufo").css("left",ufoLeft);
-              }
-          }
+    function bulletMove(e) {
+        bulletUp = bulletUp + 20;
+        $(".bullet").css("bottom", bulletUp);
+        if (bulletUp == 790) {
+            bulletUp = 110;
+            $(".bullet").css("bottom", bulletUp);
+            ufoKill();
+        } else {
+            $(".ufo > img").css("display", "block");
+        }
+    }
 
-          //get progressbar value
-      var value = 5;
+    var imgLeft = $('.plane').offset().left;
+    var bulletLeft = $(".bullet").offset().left;
 
-          function fillProgressbar() {
-              value = value + 5;
-              //set progress bar value
-              $( ".progressbar" ).progressbar( "option", "value", value);
-          }
+    $(window).keydown(function (event) {
+        if (event.key == "ArrowRight") {
 
-          let level =1;
-          function levelUp() {
-              level = level +1;
-            $(".level").text("Level : "+level);
-          }
+            imgLeft = imgLeft + 10;
+            bulletLeft = bulletLeft + 10;
+            $('.plane').css("left", imgLeft)
+            $('.bullet').css("left", bulletLeft)
+
+        } else if (event.key == "ArrowLeft") {
+
+            imgLeft = imgLeft - 10;
+            bulletLeft = bulletLeft - 10;
+            $(".plane").css("left", imgLeft)
+            $('.bullet').css("left", bulletLeft)
+
+        }
+
+    });
 
 
-  </script>
+    function ufoKill() {
+        var max = $(".ufo").offset().left + 100;
+        var min = $(".ufo").offset().left;
+        var ufoUp = parseInt($(".ufo").css("bottom"));
+        var bulletPosition = $(".bullet").offset().left;
+
+        if (max > bulletPosition && min < bulletPosition) {
+            console.log("Max:" + max)
+            console.log("Min:" + min)
+            console.log("UFO up:" + ufoUp)
+            console.log("bullet posi:" + bulletPosition)
+
+            $(".ufo > img").css("display", "none");
+            respawnUFO();
+            /*levelUp();*/
+            fillProgressbar();
+        }
+    }
+
+
+    //get progressbar value
+    var value = 5;
+
+    function fillProgressbar() {
+        value = value + 5;
+        //set progress bar value
+        $(".progressbar").progressbar("option", "value", value);
+    }
+
+    let level = 1;
+
+    function levelUp() {
+        level = level + 1;
+        $(".level").text("Level : " + level);
+    }
+
+
+    function randomIntFromInterval(min, max) { // min and max included
+        return Math.floor(Math.random() * (max - min + 38) + min)
+    }
+
+    function respawnUFO() {
+        const rndInt = randomIntFromInterval(100, 1000)
+        $(".ufo").css("left", rndInt);
+    }
+
+
+</script>
 
 </body>
 </html>
