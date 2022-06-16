@@ -5,110 +5,7 @@ Rajith Sanjaya
  -->
 <!DOCTYPE html>
 <html lang="en">
-<style>
-
-    body{
-        overflow: hidden;
-    }
-
-    .loader {
-        position: fixed;
-        width: 200px;
-        height: 200px;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-    }
-
-    .loader > img {
-        width: 100%;
-        height: 100%;
-    }
-
-    .container {
-
-    }
-
-    .plane {
-        width: 100px;
-        position: absolute;
-        left: 920px;
-        bottom: 20px;
-    }
-
-    .bullet {
-        position: absolute;
-        left: 967.5px;
-        bottom: 110px;
-        width: 5px;
-        height: 15px;
-        background-color: white;
-    }
-
-    .ufo {
-        width: 100px;
-        position: absolute;
-        left: 920px;
-        bottom: 800px;
-    }
-
-    img {
-        width: 100px;
-    }
-
-    body > section {
-        position: absolute;
-        background-image: url("assets/img/background_vector.gif");
-        background-size: cover;
-        height: 100vh;
-        width: 100vw;
-        background-repeat: no-repeat;
-    }
-
-    .background > img {
-
-    }
-
-    .level {
-        width: 400px;
-        color: white;
-        font-weight: bolder;
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 1;
-    }
-
-    .progressbar {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-        right: -200px;
-        transform: rotate(270deg);
-        width: 500px;
-
-
-    }
-
-    .progressbar .ui-progressbar-value {
-        background-color: blue;
-    }
-
-
-    @keyframes sky {
-        from {
-            transform: translateY(0);
-
-        }
-        to {
-            transform: translateY(-75%);
-        }
-    }
-</style>
-
+<link rel="stylesheet" href="css/main.css">
 <head>
     <meta charset="UTF-8">
     <title>Game</title>
@@ -117,6 +14,11 @@ Rajith Sanjaya
 </head>
 
 <body>
+<style>
+    body > section {
+        background-image: url("assets/img/background_vector.gif");
+    }
+</style>
 
 <div class="loader">
     <img src="assets/img/loader.gif" alt="">
@@ -146,115 +48,6 @@ Rajith Sanjaya
 
 <script src="assets/js/http_ajax.googleapis.com_ajax_libs_jquery_3.6.0_jquery.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-
-
-<script>
-    $(window).on("load", function () {
-        $(".loader").fadeOut(1000);
-    });
-
-
-    $(function () {
-        $(".progressbar").progressbar({
-            value: 5,
-            max: 100,
-            complete: function (event, ui) {
-                levelUp();
-                value = 0;
-                $(".progressbar").progressbar("option", "value", 0);
-            }
-        });
-
-    });
-
-
-    setInterval(bulletMove, 10);
-
-    var bulletUp = parseInt($(".bullet").css("bottom"))
-
-    function bulletMove(e) {
-        bulletUp = bulletUp + 20;
-        $(".bullet").css("bottom", bulletUp);
-        if (bulletUp == 790) {
-            bulletUp = 110;
-            $(".bullet").css("bottom", bulletUp);
-            ufoKill();
-        } else {
-            $(".ufo > img").css("display", "block");
-        }
-    }
-
-    var imgLeft = $('.plane').offset().left;
-    var bulletLeft = $(".bullet").offset().left;
-
-    $(window).keydown(function (event) {
-        if (event.key == "ArrowRight") {
-
-            imgLeft = imgLeft + 10;
-            bulletLeft = bulletLeft + 10;
-            $('.plane').css("left", imgLeft)
-            $('.bullet').css("left", bulletLeft)
-
-        } else if (event.key == "ArrowLeft") {
-
-            imgLeft = imgLeft - 10;
-            bulletLeft = bulletLeft - 10;
-            $(".plane").css("left", imgLeft)
-            $('.bullet').css("left", bulletLeft)
-
-        }
-
-    });
-
-
-    function ufoKill() {
-        var max = $(".ufo").offset().left + 100;
-        var min = $(".ufo").offset().left;
-        var ufoUp = parseInt($(".ufo").css("bottom"));
-        var bulletPosition = $(".bullet").offset().left;
-
-        if (max > bulletPosition && min < bulletPosition) {
-            console.log("Max:" + max)
-            console.log("Min:" + min)
-            console.log("UFO up:" + ufoUp)
-            console.log("bullet posi:" + bulletPosition)
-
-            $(".ufo > img").css("display", "none");
-            respawnUFO();
-            /*levelUp();*/
-            fillProgressbar();
-        }
-    }
-
-
-    //get progressbar value
-    var value = 5;
-
-    function fillProgressbar() {
-        value = value + 5;
-        //set progress bar value
-        $(".progressbar").progressbar("option", "value", value);
-    }
-
-    let level = 1;
-
-    function levelUp() {
-        level = level + 1;
-        $(".level").text("Level : " + level);
-    }
-
-
-    function randomIntFromInterval(min, max) { // min and max included
-        return Math.floor(Math.random() * (max - min + 38) + min)
-    }
-
-    function respawnUFO() {
-        const rndInt = randomIntFromInterval(100, 1000)
-        $(".ufo").css("left", rndInt);
-    }
-
-
-</script>
-
+<script src="controllers/main.js"></script>
 </body>
 </html>
